@@ -20,6 +20,9 @@
   <title>WebCampBackendNew</title><meta name="csrf-param" content="authenticity_token"><meta name="csrf-token" content="EGt/c+uo/nqd7AecAccjVQLfZU+w8l00kDwMiLGB4UZIPVhe5kaPtJ+mvat/clN3sUmFRAHbDDoFebPCLUfT7A=="></head>
 
   <body>
+    <% flash.each do |message_type, message| %>
+      <%= message %>
+    <% end %>
     <p id="notice"></p>
 
 <h1>Books</h1>
@@ -49,6 +52,16 @@
 
 
 <h2>New book</h2>
+<% if @book.errors.any? %>
+  <h3> error </h3>
+  <div class="alert alert-warning">
+    <ul>
+      <% @book.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
 <!-- form_with部分 -->
 <%= form_with model:@book, local:true do |f| %>
 
